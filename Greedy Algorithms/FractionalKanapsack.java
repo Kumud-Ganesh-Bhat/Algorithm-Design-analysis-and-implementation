@@ -92,7 +92,7 @@ public class FractionalKnapsack{
         public Objects(int profit, int weight){
             this.profit = profit;
             this.weight = weight;
-            pw_ratio = this.profit/this.weight;
+            this.pw_ratio = this.profit/this.weight;
             
         }
     }
