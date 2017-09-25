@@ -48,8 +48,8 @@ public class JobSequenceDeadline {
            }
        });
        
-       for(i=0; i<n; i++)
-           System.out.println(jobs[i].profit + " " + jobs[i].deadline);
+       /*for(i=0; i<n; i++)
+           System.out.println(jobs[i].profit + " " + jobs[i].deadline);*/
        
        //Finding slots for each job starting from deadline slot
        for(i=0; i<n; i++){
