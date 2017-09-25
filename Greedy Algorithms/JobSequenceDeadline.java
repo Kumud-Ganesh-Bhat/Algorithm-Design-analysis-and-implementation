@@ -27,7 +27,7 @@ import java.util.Comparator;
 
 public class JobSequenceDeadline {
     
-   public static void getMaxProfit(int[] profits, int[] deadlines, int n){
+   public static void getMaxProfit(int[] jobsArr, int[] profits, int[] deadlines, int n){
        int i,j; //loop variables
        int maxProfit;//maximum profit
        
@@ -54,12 +54,21 @@ public class JobSequenceDeadline {
        //Finding slots for each job starting from deadline slot
        for(i=0; i<n; i++){
            for(j=jobs[i].deadline-1; j>=0; j--){
-               if(ds[j] == 0){
+               if(ds[j] == 0){ //if the corresponding deadline slot is empty
                    ds[j] = jobs[i].profit;
+                   jobs[i].visited = 1;
                    break;
                }
            }
        }
+       System.out.println("Jobs visited:");
+       
+       for(i=0; i<n; i++){
+           if(jobs[i].visited == 1)
+               System.out.print("J"+jobs[i]+" ");
+       }
+       
+       System.out.println();
        
        maxProfit = sumArray(ds);
        System.out.println("Maximum profit "+ " " + maxProfit);
@@ -87,6 +96,7 @@ public class JobSequenceDeadline {
    
    public static void main(String[] args){
        int n; //number of jobs
+       int[] jobs; //jobs array
        int[] profits; //profits of jobs
        int[] deadlines; //deadlines of jobs
        int i; //loop variable
@@ -97,25 +107,30 @@ public class JobSequenceDeadline {
        System.out.println("Enter the number of jobs");
        n = sc.nextInt();
        
+       jobs = new int[n];
        profits = new int[n];
        deadlines = new int[n];
        
        System.out.println("Enter the profits and deaadliness of jobs");
        for(i=0; i<n; i++){
+           jobs[i] = i+1;
            profits[i] = sc.nextInt();
            deadlines[i] = sc.nextInt();
        }
        
-       getMaxProfit(profits, deadlines, n);
+       getMaxProfit(jobs, profits, deadlines, n);
    } 
    
    //Java doesn't require forward declarations
    private static class Jobs{
        int profit; //profit of aan individual job
        int deadline; //deadline of an individual job
+       int visited; //flag to check whether job has been visited or not
+       
        public Jobs(int profit, int deadline){
            this.profit = profit;
            this.deadline = deadline;
+           this.visited = 0;
        }
    }
 }
