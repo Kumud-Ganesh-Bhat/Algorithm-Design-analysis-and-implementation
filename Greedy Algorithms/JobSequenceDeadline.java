@@ -38,7 +38,7 @@ public class JobSequenceDeadline {
        
        Jobs[] jobs = new Jobs[n];
        for(i=0; i<n; i++)
-           jobs[i] = new Jobs(profits[i], deadlines[i]);
+           jobs[i] = new Jobs(jobsArr[i], profits[i], deadlines[i]);
        
        //Sort the jobs in descending order of their profits
        Arrays.sort(jobs, new Comparator<Jobs>(){
@@ -65,7 +65,7 @@ public class JobSequenceDeadline {
        
        for(i=0; i<n; i++){
            if(jobs[i].visited == 1)
-               System.out.print("J"+jobs[i]+" ");
+               System.out.print("J"+jobs[i].job +" ");
        }
        
        System.out.println();
@@ -123,11 +123,13 @@ public class JobSequenceDeadline {
    
    //Java doesn't require forward declarations
    private static class Jobs{
+       int job; //individual job
        int profit; //profit of aan individual job
        int deadline; //deadline of an individual job
        int visited; //flag to check whether job has been visited or not
        
-       public Jobs(int profit, int deadline){
+       public Jobs(int job, int profit, int deadline){
+           this.job = job;
            this.profit = profit;
            this.deadline = deadline;
            this.visited = 0;
